@@ -1,0 +1,8 @@
+services:
+    david63.joineddate.listener:
+        class: david63\joineddate\event\listener
+        arguments:
+            - @config
+            - @user
+        tags:
+            - { name: event.listener }
