@@ -48,9 +48,10 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'core.acp_board_config_edit_add'	=> 'acp_board_settings',
-			'core.user_setup'					=> 'load_language_on_setup',
-			'core.viewtopic_cache_user_data'	=> 'modify_joined_date',
+			'core.acp_board_config_edit_add'		=> 'acp_board_settings',
+			'core.user_setup'						=> 'load_language_on_setup',
+			'core.viewtopic_cache_user_data'		=> 'modify_joined_date',
+			'core.memberlist_prepare_profile_data'	=> 'modify_profile',
 		);
 	}
 
@@ -109,8 +110,13 @@ class listener implements EventSubscriberInterface
 		$event->offsetSet('user_cache_data', $user_cache_data);
 	}
 
+	public function modify_profile($event)
+	{
+		$data = $event['data'];
+		$template_data = $event['template_data'];
 
+		$template_data['JOINED'] = $this->user->format_date($data['user_regdate'], $this->config['joined_dateformat']);
 
-
-
+		$event->offsetSet('template_data', $template_data);
+	}
 }
