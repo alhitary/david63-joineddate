@@ -38,13 +38,9 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'dateformats'	=> array_merge($lang['dateformats'], array(
-		'M Y'		=> 'Jan 2008',
 		'F Y'		=> 'January 2008',
-		'd M Y'		=> '1 Jan 2008',
 		'd F Y'		=> '1 January 2008',
-		'|M Y|'		=> 'Today / Jan 2008',
 		'|F Y|'		=> 'Today / January 2008',
-		'|d M Y|'	=> 'Today / 1 Jan 2008',
 		'|d F Y|'	=> 'Today / 1 January 2008',
 	)),
 ));

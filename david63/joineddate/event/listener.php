@@ -71,7 +71,8 @@ class listener implements EventSubscriberInterface
 					$new_display_var['vars']['joined_dateformat'] = array(
 						'lang'		=> 'JOINED_DATE_FORMAT',
 						'validate'	=> 'string',
-						'type'		=> 'text:10:10',
+						'type'		=> 'custom',
+						'method'	=> 'dateformat_select',
 						'explain' 	=> true,
 					);
 				}
