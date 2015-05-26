@@ -1,16 +1,18 @@
 {
 	"name": "david63/joineddate",
 	"type": "phpbb-extension",
-	"description": "An extension to change joined date format displayed in viewtopic and memberlist/user profile.",
+	"description": "An extension to change the joined date format displayed in viewtopic and memberlist/user profile.",
 	"homepage": "",
-	"version": "0.0.2-b3",
+	"version": "0.0.3-b3",
 	"time": "2015-05-24",
 	"keywords": [
 		"phpbb",
 		"extension",
 		"joined",
 		"date",
-		"viewtopic"
+		"viewtopic",
+		"memberlist",
+		"profile"
 	],
 	"license": "GPL-2.0",
 	"authors": [{

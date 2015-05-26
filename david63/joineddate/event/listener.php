@@ -48,74 +48,49 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'core.acp_board_config_edit_add'		=> 'acp_board_settings',
-			'core.user_setup'						=> 'load_language_on_setup',
-			'core.viewtopic_cache_user_data'		=> 'modify_joined_date',
+			'core.viewtopic_cache_user_data'		=> 'modify_viewtopic',
 			'core.memberlist_prepare_profile_data'	=> 'modify_profile',
 		);
 	}
 
-	public function acp_board_settings($event)
-	{
-		if ($event['mode'] == 'settings')
-		{
-			$new_display_var = array(
-				'title'	=> $event['display_vars']['title'],
-				'vars'	=> array(),
-			);
-
-			foreach ($event['display_vars']['vars'] as $key => $content)
-			{
-				$new_display_var['vars'][$key] = $content;
-				if ($key == 'default_dateformat')
-				{
-					$new_display_var['vars']['joined_dateformat'] = array(
-						'lang'		=> 'JOINED_DATE_FORMAT',
-						'validate'	=> 'string',
-						'type'		=> 'custom',
-						'method'	=> 'dateformat_select',
-						'explain' 	=> true,
-					);
-				}
-			}
-
-			$event->offsetSet('display_vars', $new_display_var);
-		}
-	}
-
 	/**
-	* Load common joineddate language files during user setup
+	* Modify the joined date format in viewtopic
 	*
 	* @param object $event The event object
 	* @return null
 	* @access public
 	*/
-	public function load_language_on_setup($event)
-	{
-		$lang_set_ext	= $event['lang_set_ext'];
-		$lang_set_ext[]	= array(
-			'ext_name' => 'david63/joineddate',
-			'lang_set' => 'common',
-		);
-		$event['lang_set_ext'] = $lang_set_ext;
-	}
-
-	public function modify_joined_date($event)
+	public function modify_viewtopic($event)
 	{
 		$user_cache_data	= $event['user_cache_data'];
 		$row				= $event['row'];
 
-		$user_cache_data['joined'] = $this->user->format_date($row['user_regdate'], $this->config['joined_dateformat']);
+		$user_cache_data['joined'] = $this->user->format_date($row['user_regdate'], $this->config['joined_dateformat_viewtopic']);
 
 		$event->offsetSet('user_cache_data', $user_cache_data);
 	}
 
+	/**
+	* Modify the joined date format in memberlist
+	*
+	* @param object $event The event object
+	* @return null
+	* @access public
+	*/
 	public function modify_profile($event)
 	{
-		$data = $event['data'];
-		$template_data = $event['template_data'];
+		$data			= $event['data'];
+		$template_data	= $event['template_data'];
 
-		$template_data['JOINED'] = $this->user->format_date($data['user_regdate'], $this->config['joined_dateformat']);
+		// Are we changing profile or memberlist?
+		if (strlen($template_data['U_NOTES']) > 0)
+		{
+			$template_data['JOINED'] = $this->user->format_date($data['user_regdate'], $this->config['joined_dateformat_profile']);
+		}
+		else
+		{
+			$template_data['JOINED'] = $this->user->format_date($data['user_regdate'], $this->config['joined_dateformat_memberlist']);
+		}
 
 		$event->offsetSet('template_data', $template_data);
 	}

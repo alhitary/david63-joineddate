@@ -37,6 +37,25 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
+	'CUSTOM_DATEFORMAT'				=> 'Custom ...',
+
 	'JOINED_DATE_FORMAT'			=> 'Joined date format',
-	'JOINED_DATE_FORMAT_EXPLAIN'	=> 'Leave blank to use the user default date format.',
+	'JOINED_DATE_FORMAT_EXPLAIN'	=> 'Here you can set the “Joined” date format that will appear on Viewtopic, Memberlist and the member’s profile.',
+	'JOINED_DATE_LOG'				=> '<strong>Joined date formats updated</strong>',
+
+	'MEMBERLIST_FORMAT'				=> 'Joined date format for Memberlist',
+	'MEMBERLIST_FORMAT_EXPLAIN'		=> 'Set the date format for the “joined” date on Memberlist.<br />Leave blank to use the user default date format.',
+
+	'PROFILE_FORMAT'				=> 'Joined date format for profile',
+	'PROFILE_FORMAT_EXPLAIN'		=> 'Set the date format for the “joined” date on a member’s profile.<br />Leave blank to use the user default date format.',
+
+	'VIEWTOPIC_FORMAT'				=> 'Joined date format for Viewtopic',
+	'VIEWTOPIC_FORMAT_EXPLAIN'		=> 'Set the date format for the “joined” date on Viewtopic.<br />Leave blank to use the user default date format.',
+
+	'dateformats'	=> array_merge($lang['dateformats'], array(
+		'F Y'		=> 'January 2008',
+		'd F Y'		=> '1 January 2008',
+		'|F Y|'		=> 'Today / January 2008',
+		'|d F Y|'	=> 'Today / 1 January 2008',
+	)),
 ));
