@@ -90,9 +90,9 @@ class admin_controller implements admin_interface
 		}
 
 		$this->template->assign_vars(array(
-			'FORMAT_MEMBERLIST'	=> $this->dateformat_select($this->config['joined_dateformat_memberlist'], 'joined_dateformat_memberlist'),
-			'FORMAT_PROFILE'	=> $this->dateformat_select($this->config['joined_dateformat_profile'], 'joined_dateformat_profile'),
-			'FORMAT_VIEWTOPIC'	=> $this->dateformat_select($this->config['joined_dateformat_viewtopic'], 'joined_dateformat_viewtopic'),
+			'FORMAT_MEMBERLIST'	=> $this->get_dateformat_select($this->config['joined_dateformat_memberlist'], 'joined_dateformat_memberlist'),
+			'FORMAT_PROFILE'	=> $this->get_dateformat_select($this->config['joined_dateformat_profile'], 'joined_dateformat_profile'),
+			'FORMAT_VIEWTOPIC'	=> $this->get_dateformat_select($this->config['joined_dateformat_viewtopic'], 'joined_dateformat_viewtopic'),
 
 			'U_ACTION'			=> $this->u_action,
 		));
@@ -126,7 +126,7 @@ class admin_controller implements admin_interface
 	/**
 	* Select default dateformat
 	*/
-	protected function dateformat_select($value, $key)
+	protected function get_dateformat_select($value, $key)
 	{
 		$dateformat_options = '';
 
